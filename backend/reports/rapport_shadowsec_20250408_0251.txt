@@ -1,0 +1,5 @@
+ShadowSec AI Report - 20250408_0251
+
+[Simulé] Scan Nmap : PORT 80/tcp ouvert (Apache)
+[Simulé] Vulnérabilités SQLi : détectées
+[Simulé] Vulnérabilités XSS : détectées
