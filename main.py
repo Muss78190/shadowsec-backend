@@ -19,6 +19,20 @@ app.add_middleware(
 REPORTS_DIR = "reports"
 os.makedirs(REPORTS_DIR, exist_ok=True)
 
+# ✅ Page d’accueil
+@app.get("/")
+def home():
+    return {
+        "message": "Bienvenue sur l’API ShadowSec AI 👋",
+        "status": "🟢 En ligne",
+        "endpoints_disponibles": [
+            "/scan",
+            "/reports",
+            "/reports/{filename}",
+            "/summaries"
+        ]
+    }
+
 # Endpoint GET /reports – Liste tous les rapports
 @app.get("/reports")
 def list_reports():
