@@ -91,5 +91,3 @@ def get_report_summaries():
         if file.endswith(".txt"):
             summaries.append(parse_report_summary(file))
     return summaries
-from headers_scan import router as headers_router
-app.include_router(headers_router)
