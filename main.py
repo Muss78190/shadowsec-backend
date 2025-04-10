@@ -130,13 +130,31 @@ def parse_report_summary(filename):
         "summary": summary if summary else ["Aucune vulnérabilité critique détectée"]
     }
 
+# === IA : GÉNÉRATION DE RECOMMANDATIONS ===
+def generate_ai_recommendation(summary: list):
+    recommendations = []
+    if "SQLi détectée" in summary:
+        recommendations.append("Utilisez des requêtes préparées (paramétrées) pour éviter les injections SQL.")
+    if "XSS détectée" in summary:
+        recommendations.append("Encodez les entrées utilisateur et utilisez le Content Security Policy (CSP).")
+    if "Ports ouverts détectés" in summary:
+        recommendations.append("Fermez les ports inutiles et utilisez un pare-feu pour limiter l'accès.")
+    if "Serveur Web détecté" in summary:
+        recommendations.append("Mettez à jour régulièrement le serveur Web et supprimez les headers sensibles.")
+    return recommendations if recommendations else ["Aucune action requise."]
+
+# === ROUTE DES RÉSUMÉS + RECOMMANDATIONS IA ===
 @app.get("/summaries")
 async def get_report_summaries(current_user=Depends(get_current_user)):
     summaries = []
     for file in os.listdir(REPORTS_DIR):
         if file.endswith(".txt"):
-            summaries.append(parse_report_summary(file))
+            parsed = parse_report_summary(file)
+            parsed["recommendations"] = generate_ai_recommendation(parsed["summary"])
+            summaries.append(parsed)
     return summaries
+
+# === LANCEMENT LOCAL ===
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=10000)
