@@ -137,3 +137,6 @@ async def get_report_summaries(current_user=Depends(get_current_user)):
         if file.endswith(".txt"):
             summaries.append(parse_report_summary(file))
     return summaries
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=10000)
