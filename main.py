@@ -17,7 +17,7 @@ ACCESS_TOKEN_EXPIRE_MINUTES = 60
 REPORTS_DIR = "reports"
 os.makedirs(REPORTS_DIR, exist_ok=True)
 
-with open("backend/users.json", "r") as f:
+with open("users.json", "r") as f:
     users = json.load(f)
 
 # === INIT FASTAPI ===
