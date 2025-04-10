@@ -1,0 +1,9 @@
+{
+    "admin": {
+      "password": "admin123"
+    },
+    "client1": {
+      "password": "shadow2025"
+    }
+  }
+  
